@@ -1,0 +1,102 @@
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e1e4e8;
+  padding: 16px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  color: #333;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.username {
+  color: #555;
+  font-size: 14px;
+}
+
+.change-password-link {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #6c757d;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.change-password-link:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+.auth-links {
+  display: flex;
+  gap: 12px;
+}
+
+.auth-link {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.auth-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.auth-link.register {
+  background-color: #007bff;
+  color: white;
+}
+
+.auth-link.register:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

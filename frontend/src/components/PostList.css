@@ -1,0 +1,105 @@
+.post-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #060606;
+}
+
+.btn-create {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-create:hover {
+  background-color: #45a049;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-table th,
+.post-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #45db2b;
+}
+
+.post-table th {
+  background-color: #4ce071;
+  font-weight: bold;
+  color: #333;
+}
+
+.post-table tr:hover {
+  background-color: #6d6d6f9b;
+}
+
+.post-table .title {
+  cursor: pointer;
+  color: #1976d2;
+}
+
+.post-table .title:hover {
+  text-decoration: underline;
+}
+
+.btn-view,
+.btn-delete {
+  margin-right: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-view {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-view:hover {
+  background-color: #0b7dda;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #da190b;
+}
+
+.loading,
+.error,
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.error {
+  color: #f44336;
+}

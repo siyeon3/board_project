@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # MongoDB 서비스
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: board
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - board-network
+
+  # Redis 서비스 (Refresh Token 관리용)
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - board-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  board-network:
+    driver: bridge
