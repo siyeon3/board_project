@@ -97,4 +97,23 @@ export class RedisService implements OnModuleDestroy {
   getClient(): Redis {
     return this.redisClient;
   }
+
+  /**
+   * 범용 GET 메서드
+   * @param key Redis 키
+   * @returns 값 또는 null
+   */
+  async get(key: string): Promise<string | null> {
+    return await this.redisClient.get(key);
+  }
+
+  /**
+   * 범용 SETEX 메서드 (만료 시간 포함)
+   * @param key Redis 키
+   * @param ttl Time to Live (초 단위)
+   * @param value 저장할 값
+   */
+  async setex(key: string, ttl: number, value: string): Promise<void> {
+    await this.redisClient.setex(key, ttl, value);
+  }
 }

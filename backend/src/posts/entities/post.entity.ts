@@ -16,6 +16,9 @@ export class Post extends Document {
   @Prop({ required: true })
   author: string; // 작성자
 
+  @Prop({ required: true, default: 'general' })
+  category: string; // 카테고리 (general, development, design, etc.)
+
   createdAt?: Date; // 생성일 (timestamps: true로 자동 생성)
   updatedAt?: Date; // 수정일 (timestamps: true로 자동 생성)
 }

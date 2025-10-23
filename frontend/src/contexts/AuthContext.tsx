@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 interface User {
   id: string;
@@ -43,13 +43,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // 토큰으로 사용자 정보 가져오기 (향후 구현)
       fetchUserProfile(token);
     } else {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }, []);
 
   const fetchUserProfile = async (token: string) => {
     try {
-      const response = await axios.get('http://localhost:3000/auth/me', {
+      const response = await api.get('/auth/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(response.data);
@@ -64,7 +64,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await api.post('/auth/login', {
         email,
         password,
       });
@@ -83,7 +83,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const register = async (email: string, username: string, password: string) => {
     try {
-      await axios.post('http://localhost:3000/auth/register', {
+      await api.post('/auth/register', {
         email,
         username,
         password,
@@ -100,8 +100,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = async () => {
     try {
       if (accessToken) {
-        await axios.post(
-          'http://localhost:3000/auth/logout',
+        await api.post(
+          '/auth/logout',
           {},
           {
             headers: { Authorization: `Bearer ${accessToken}` },

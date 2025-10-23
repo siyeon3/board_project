@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Post, CreatePostDto } from '../types/post';
 import postService from '../services/postService';
 import { useAuth } from '../contexts/AuthContext';
-import './PostForm.css';
 
 /**
  * 게시글 작성/수정 폼 컴포넌트
@@ -19,8 +18,21 @@ const PostForm: React.FC<PostFormProps> = ({ post, onSuccess, onCancel }) => {
     title: '',
     content: '',
     author: user?.username || '',
+    category: 'general',
   });
   const [loading, setLoading] = useState(false);
+
+  // 카테고리 목록
+  const categories = [
+    { value: 'general', label: '일반', emoji: '💬' },
+    { value: 'development', label: '개발', emoji: '💻' },
+    { value: 'design', label: '디자인', emoji: '🎨' },
+    { value: 'marketing', label: '마케팅', emoji: '📢' },
+    { value: 'business', label: '비즈니스', emoji: '💼' },
+    { value: 'lifestyle', label: '라이프스타일', emoji: '🌟' },
+    { value: 'tech', label: '기술', emoji: '🔧' },
+    { value: 'other', label: '기타', emoji: '📌' },
+  ];
 
   // 수정 모드일 경우 초기 데이터 설정
   useEffect(() => {
@@ -29,12 +41,13 @@ const PostForm: React.FC<PostFormProps> = ({ post, onSuccess, onCancel }) => {
         title: post.title,
         content: post.content,
         author: post.author,
+        category: post.category || 'general',
       });
     }
   }, [post]);
 
   // 입력값 변경 처리
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -86,7 +99,7 @@ const PostForm: React.FC<PostFormProps> = ({ post, onSuccess, onCancel }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="w-full">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -119,6 +132,27 @@ const PostForm: React.FC<PostFormProps> = ({ post, onSuccess, onCancel }) => {
 
           {/* Form Fields */}
           <div className="p-6 space-y-6">
+            {/* Category */}
+            <div>
+              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+                카테고리
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:bg-gray-100 disabled:cursor-not-allowed"
+              >
+                {categories.map((cat) => (
+                  <option key={cat.value} value={cat.value}>
+                    {cat.emoji} {cat.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* Title */}
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">

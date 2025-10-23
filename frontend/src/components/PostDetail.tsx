@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post } from '../types/post';
 import { useAuth } from '../contexts/AuthContext';
+import CommentSection from './CommentSection';
 
 /**
  * 게시글 상세보기 컴포넌트 - SNS 스타일
@@ -26,7 +27,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack, onEdit }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="w-full">
       {/* Back Button */}
       <button
         onClick={onBack}
@@ -101,6 +102,11 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack, onEdit }) => {
               게시글 ID: {post._id}
             </div>
           </div>
+        </div>
+
+        {/* Comments Section */}
+        <div className="px-6 pb-6">
+          <CommentSection postId={post._id} />
         </div>
       </div>
     </div>

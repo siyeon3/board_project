@@ -3,6 +3,7 @@ import { Post } from '../types/post';
 import PostList from '../components/PostList';
 import PostDetail from '../components/PostDetail';
 import PostForm from '../components/PostForm';
+import NewsSidebar from '../components/NewsSidebar';
 
 /**
  * 게시판 페이지 컴포넌트
@@ -38,20 +39,33 @@ function PostsPage() {
   };
 
   return (
-    <div className="posts-page">
-      {viewMode === 'list' && (
-        <PostList onSelectPost={handleSelectPost} onCreateNew={handleCreateNew} />
-      )}
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-[1800px] mx-auto px-4 py-8">
+        <div className="flex gap-6">
+          {/* Left Sidebar - Tech News */}
+          <NewsSidebar position="left" category="technology" title="🔧 Tech News" />
 
-      {viewMode === 'detail' && selectedPost && (
-        <PostDetail post={selectedPost} onBack={handleBackToList} onEdit={handleEdit} />
-      )}
+          {/* Main Content */}
+          <div className="flex-1 min-w-0">
+            {viewMode === 'list' && (
+              <PostList onSelectPost={handleSelectPost} onCreateNew={handleCreateNew} />
+            )}
 
-      {viewMode === 'create' && <PostForm onSuccess={handleBackToList} onCancel={handleBackToList} />}
+            {viewMode === 'detail' && selectedPost && (
+              <PostDetail post={selectedPost} onBack={handleBackToList} onEdit={handleEdit} />
+            )}
 
-      {viewMode === 'edit' && selectedPost && (
-        <PostForm post={selectedPost} onSuccess={handleBackToList} onCancel={handleBackToList} />
-      )}
+            {viewMode === 'create' && <PostForm onSuccess={handleBackToList} onCancel={handleBackToList} />}
+
+            {viewMode === 'edit' && selectedPost && (
+              <PostForm post={selectedPost} onSuccess={handleBackToList} onCancel={handleBackToList} />
+            )}
+          </div>
+
+          {/* Right Sidebar - Business News */}
+          <NewsSidebar position="right" category="business" title="💼 Business News" />
+        </div>
+      </div>
     </div>
   );
 }

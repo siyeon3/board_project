@@ -7,6 +7,9 @@ import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { RedisModule } from './redis/redis.module';
 import { UsersModule } from './users/users.module';
+import { ChatbotModule } from './chatbot/chatbot.module';
+import { CommentsModule } from './comments/comments.module';
+import { NewsModule } from './news/news.module';
 
 /**
  * 애플리케이션 루트 모듈
@@ -29,6 +32,11 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     // 게시글 모듈
     PostsModule,
+    // 댓글 모듈
+    CommentsModule,
+    // 챗봇 모듈
+    ChatbotModule,
+    NewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

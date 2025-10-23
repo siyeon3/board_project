@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/posts');
     } catch (err: any) {
       setError(err.response?.data?.message || '로그인에 실패했습니다.');
     } finally {

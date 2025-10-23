@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 /**
  * 게시글 생성 DTO
@@ -16,4 +16,8 @@ export class CreatePostDto {
   @IsNotEmpty()
   @IsString()
   author: string; // 작성자
+
+  @IsOptional()
+  @IsString()
+  category?: string; // 카테고리 (선택, 기본값: general)
 }

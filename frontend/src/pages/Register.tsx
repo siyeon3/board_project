@@ -33,7 +33,7 @@ const Register: React.FC = () => {
 
     try {
       await register(email, username, password);
-      navigate('/');
+      navigate('/posts');
     } catch (err: any) {
       setError(err.response?.data?.message || '회원가입에 실패했습니다.');
     } finally {

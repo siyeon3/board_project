@@ -15,8 +15,10 @@ async function bootstrap() {
   // 전역 ValidationPipe 설정
   app.useGlobalPipes(new ValidationPipe());
 
-  // 서버 시작 (포트: 3000)
-  await app.listen(process.env.PORT ?? 3000);
-  console.log(`애플리케이션이 포트 ${process.env.PORT ?? 3000}에서 실행 중입니다.`);
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
+
+  // 서버 시작 (포트: 환경 변수 또는 기본값 3001)
+  await app.listen(port);
+  console.log(`애플리케이션이 포트 ${port}에서 실행 중입니다.`);
 }
 bootstrap();

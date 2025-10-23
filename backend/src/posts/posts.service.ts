@@ -27,11 +27,59 @@ export class PostsService {
   }
 
   /**
-   * 모든 게시글 조회 (최신순)
-   * @returns 게시글 목록
+   * 모든 게시글 조회 (최신순, 페이지네이션)
+   * @param search 검색어 (제목 또는 내용에서 검색)
+   * @param author 작성자 필터
+   * @param category 카테고리 필터
+   * @param page 페이지 번호 (기본값: 1)
+   * @param limit 페이지당 게시글 수 (기본값: 10)
+   * @returns 게시글 목록과 페이지 정보
    */
-  async findAll(): Promise<Post[]> {
-    return await this.postModel.find().sort({ createdAt: -1 }).exec();
+  async findAll(
+    search?: string,
+    author?: string,
+    category?: string,
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{ posts: Post[]; total: number; page: number; totalPages: number }> {
+    const query: any = {};
+
+    // 검색어가 있으면 제목 또는 내용에서 검색 (대소문자 구분 없음)
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { content: { $regex: search, $options: 'i' } },
+      ];
+    }
+
+    // 작성자 필터가 있으면 추가
+    if (author) {
+      query.author = { $regex: author, $options: 'i' };
+    }
+
+    // 카테고리 필터가 있으면 추가
+    if (category) {
+      query.category = category;
+    }
+
+    // 전체 게시글 수 조회
+    const total = await this.postModel.countDocuments(query).exec();
+
+    // 페이지네이션 적용
+    const skip = (page - 1) * limit;
+    const posts = await this.postModel
+      .find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
+    return {
+      posts,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   /**

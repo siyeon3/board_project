@@ -9,6 +9,7 @@ import {
   ValidationPipe,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -42,11 +43,20 @@ export class PostsController {
   /**
    * 모든 게시글 조회 (인증 불필요)
    * GET /posts
+   * Query params: search (검색어), author (작성자 필터), category (카테고리 필터), page (페이지), limit (페이지당 개수)
    */
   @Public()
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  findAll(
+    @Query('search') search?: string,
+    @Query('author') author?: string,
+    @Query('category') category?: string,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    const pageNum = page ? parseInt(page, 10) : 1;
+    const limitNum = limit ? parseInt(limit, 10) : 10;
+    return this.postsService.findAll(search, author, category, pageNum, limitNum);
   }
 
   /**

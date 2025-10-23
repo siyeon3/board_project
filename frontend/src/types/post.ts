@@ -7,6 +7,7 @@ export interface Post {
   title: string;
   content: string;
   author: string;
+  category: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -18,6 +19,7 @@ export interface CreatePostDto {
   title: string;
   content: string;
   author: string;
+  category?: string;
 }
 
 /**
@@ -27,4 +29,5 @@ export interface UpdatePostDto {
   title?: string;
   content?: string;
   author?: string;
+  category?: string;
 }
